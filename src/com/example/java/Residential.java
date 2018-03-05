@@ -2,11 +2,23 @@ package com.example.java;
 
 import java.text.NumberFormat;
 
+/**
+ * Residential class that is a sub class of Customer
+ */
 public class Residential extends Customer {
-    //variables to hold a senior discount that was not defined in the customer class
+    /**
+     * senior Variable to hold if a senior discount is applicable for the customer
+     */
     private boolean senior;
 
-    //accepts arguments and assigns them to the variables
+    /**
+     * constructor method to collect the passed arguments and save them as variables
+     * @param customerName Variable to hold the customers name
+     * @param customerAddress Variable to hold the customers address
+     * @param customerPhone Variable to hold the customers phone number
+     * @param squareFootage Variable to hold the area to be mowed
+     * @param senior Variable to hold is a senior discount is applicable
+     */
     Residential(String customerName, String customerAddress, String customerPhone, double squareFootage, boolean senior) {
         this.customerName = customerName;
         this.customerAddress = customerAddress;
@@ -15,39 +27,49 @@ public class Residential extends Customer {
         this.senior = senior;
     }
 
+    /**
+     * residentialCharges method
+     * calculate the amount owed and display information to the user
+     */
     public void residentialCharges(){
-        //use number formatting to set numbers to 2 decimal places
-        NumberFormat nf = NumberFormat.getNumberInstance() ; //we get the instance of the number
-        nf.setGroupingUsed(true) ; // group by threes
-        nf.setMaximumFractionDigits(2) ; //set the max number of decimal digits.
-        nf.setMinimumFractionDigits(2) ; //set the min number of decimal digits.
+        /**
+         * @param nf Used to create an instance of the number format method
+         * use number formatting to reformat to 2 decimal places
+         */
+        NumberFormat nf = NumberFormat.getNumberInstance();
+        nf.setGroupingUsed(true);
+        nf.setMaximumFractionDigits(2);
+        nf.setMinimumFractionDigits(2);
 
-        //create a variable to hold the rate to be charged to the customer
+        /**
+         * @param rate to hold the rate as a double
+         * @param residentialRate To hold the rate of 6.00 which is charged per 1000 square foot to be mowed
+         * set rate to the residential rate multiplied by square footage divided by 1000
+         * if the senior discount is applicable provide a 15% discount by multiplying the rate by .85
+         * use the number format instance to reformat the rate
+         */
         double rate;
-        //set the base rate as 5 to be multiplied by the area and any applicable discounts
         double residentialRate = 6.00;
-        //set the rate to the residentialRate multiplied by the area to be mowed
         rate = residentialRate * (squareFootage / 1000);
-        //multiple the rate by .85 to give a 15% discount if a senior discount is applicable
         if (senior) rate = rate * 0.85;
-
-        //use number formatting to set the rate to 2 decimal places
         String weeklyRate = nf.format(rate);
 
-        //call the customer display method that was created in the superclass to display basic customer information
+        /**
+         * call the displayCustomer method to display the common customer information
+         * display the residential specific information to the user
+         * use conditional display if a senior discount is available
+         * display the weekly charge to the user
+         */
         displayCustomer();
-        //display the rest of the information to the user
         System.out.println("\nProperty Information");
         System.out.println("----------------------");
         System.out.println("Total area to be mowed " + squareFootage + " sq ft.");
-        //use of a conditional to display if a discount was applied
         if (senior) {
             System.out.println("Senior discount: Yes");
         }
         else {
             System.out.println("Senior discount: No");
         }
-        //display the weekly rate to the user
         System.out.println("Total weekly charge is: $" + weeklyRate);
     }
 }

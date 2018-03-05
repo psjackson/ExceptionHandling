@@ -1,13 +1,23 @@
 package com.example.java;
 
+/**
+ * Customer class, a superclass of Commercial and Residential subclasses
+ */
 class Customer {
-    //create variables to hold the customer name, phone number, address and square footage
+    /**
+     * customerName Variable to hold the customers name
+     * customerPhone Variable to hold the customers phone number
+     * customerAddress Variable to hold the customers address
+     * squareFootage Variable to hold the total area to be mowed
+     */
     String customerName;
     String customerPhone;
     String customerAddress;
     double squareFootage;
 
-    //method to display basic customer information to be used by the subclasses
+    /**
+     * displayCustomer method to display the common customer information to the user
+     */
     void displayCustomer() {
         System.out.println("\nCustomer Information");
         System.out.println("----------------------");
